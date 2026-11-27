@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
 
-    Route::prefix('/users')->group(function($route) {
+    Route::prefix('/users')->group(function ($route) {
         $route->get('/', [UserController::class, 'index']);
         $route->get('/{user}', [UserController::class, 'show']);
         $route->put('/{user}', [UserController::class, 'update']);
@@ -28,8 +28,9 @@ Route::middleware('auth:sanctum')->group(function () {
         $route->delete('/{user}', [UserController::class, 'destroy']);
     });
 
-    Route::prefix('/posts')->group(function($route) {
+    Route::prefix('/posts')->group(function ($route) {
         $route->get('/', [PostController::class, 'index']);
+        $route->post('/', [PostController::class, 'store']);
         $route->get('/{post}', [PostController::class, 'show']);
         $route->put('/{post}', [PostController::class, 'update']);
         $route->patch('/{post}', [PostController::class, 'update']);
@@ -41,7 +42,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
 
-    Route::prefix('/comments')->group(function($route) {
+    Route::prefix('/comments')->group(function ($route) {
         $route->put('/{comment}', [CommentController::class, 'update']);
         $route->patch('/{comment}', [CommentController::class, 'update']);
         $route->delete('/{comment}', [CommentController::class, 'destroy']);
